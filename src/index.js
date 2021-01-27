@@ -79,6 +79,7 @@ const surfaceGridSeries = chart3D.addSurfaceSeries( {
     .setFillStyle( paletteFill )
 
 
+
 // Setup data streaming.
 let samplesAmount = 0
 createSpectrumDataGenerator()
