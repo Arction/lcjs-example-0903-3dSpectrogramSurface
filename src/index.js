@@ -40,6 +40,7 @@ const lut = new LUT( {
         { value: 60, color: ColorRGBA( 132, 15, 4 ) },
         { value: 100, color: ColorRGBA( 255, 255, 0 ) }
     ],
+    units: 'dB',
     interpolate: true
 } )
 const paletteFill = new PalettedFill( { lut, lookUpProperty: 'y' } )
@@ -77,7 +78,10 @@ const surfaceGridSeries = chart3D.addSurfaceSeries( {
     pixelate: true
 } )
     .setFillStyle( paletteFill )
+    .setName('Spectrogram')
 
+// Add LegendBox to chart.
+const legend = chart3D.addLegendBox().add(chart3D)
 
 
 // Setup data streaming.
@@ -160,3 +164,6 @@ const handleCameraAnimationToggled = ( state ) => {
 const cameraAnimationEnabledCheckbox = group.addElement( UIElementBuilders.CheckBox )
 cameraAnimationEnabledCheckbox.onSwitch((_, state) => handleCameraAnimationToggled( state ))
 handleCameraAnimationToggled( true )
+chart3D.onBackgroundMouseDrag(() => {
+    handleCameraAnimationToggled( false )
+})
