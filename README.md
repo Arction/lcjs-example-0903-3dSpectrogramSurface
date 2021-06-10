@@ -1,6 +1,6 @@
-# Spectrogram Surface 3D
+# JavaScript Spectrogram Surface 3D
 
-![Spectrogram Surface 3D](3dSpectrogramSurface.png)
+![JavaScript Spectrogram Surface 3D](3dSpectrogramSurface.png)
 
 This demo application belongs to the set of examples for LightningChart JS, data visualization library for JavaScript.
 
