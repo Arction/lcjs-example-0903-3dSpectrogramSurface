@@ -17,6 +17,7 @@ const {
     UIOrigins,
     UILayoutBuilders,
     UIBackgrounds,
+    SolidFill,
     Themes
 } = lcjs
 
@@ -48,7 +49,7 @@ const paletteFill = new PalettedFill( { lut, lookUpProperty: 'y' } )
 
 // Create Chart3D and configure Axes.
 const chart3D = lightningChart().Chart3D({
-    // theme: Themes.dark
+    // theme: Themes.darkGold
 })
     .setTitle( '3D Surface Grid Spectrogram' )
     .setBoundingBox( { x: 1, y: 1, z: 2 } )
@@ -78,10 +79,17 @@ const surfaceGridSeries = chart3D.addSurfaceSeries( {
     pixelate: true
 } )
     .setFillStyle( paletteFill )
+    .setWireframeStyle(new SolidFill({ color: ColorRGBA(0, 0, 0, 64) }))
     .setName('Spectrogram')
 
 // Add LegendBox to chart.
-const legend = chart3D.addLegendBox().add(chart3D)
+const legend = chart3D.addLegendBox()
+    // Dispose example UI elements automatically if they take too much space. This is to avoid bad UI on mobile / etc. devices.
+    .setAutoDispose({
+        type: 'max-width',
+        maxWidth: 0.30,
+    })
+    .add(chart3D)
 
 
 // Setup data streaming.
@@ -142,6 +150,11 @@ group
     .setOrigin( UIOrigins.LeftTop )
     .setMargin( 10 )
     .setPadding( 4 )
+    // Dispose example UI elements automatically if they take too much space. This is to avoid bad UI on mobile / etc. devices.
+    .setAutoDispose({
+        type: 'max-height',
+        maxHeight: 0.30,
+    })
 
 // Add UI control for toggling between infinite streaming data and static data amount.
 const handleStreamingToggled = ( state ) => {
